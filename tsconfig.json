@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "module": "CommonJS",
+    "target": "es5",
+    "lib": ["DOM", "ES6", "ES2016", "ES2017"],
+    "jsx": "react",
+    "declaration": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+    "removeComments": true,
+    "isolatedModules": true,
+    "typeRoots": ["index.d.ts", "./node_modules/@types"]
+  },
+  "include": ["./src/lib/**/*.tsx", "./src/lib/**/*.ts"]
+}
