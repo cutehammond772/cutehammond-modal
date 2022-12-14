@@ -2,6 +2,8 @@
 
 이 라이브러리는 커뮤니티 `Pill`에서 사용하고 있는 커스텀 모달 라이브러리입니다.
 
+[![npm version](https://img.shields.io/npm/v/@cutehammond/modal.svg?style=flat-square)](https://www.npmjs.com/package/@cutehammond/modal)
+
 # 시작하기
 
 ## 이 라이브러리에 사용된 기술 스택
@@ -85,7 +87,7 @@ export default function* rootSaga() {
 
 > 단, `GlobalStyles`과 같이 전역 스타일 설정이 존재하는 경우 이 설정이 먼저 적용되도록 합니다.
 
-> FAQ: `ModalMapper`가 props로 전달되는데, 이것은 무엇인가요?
+> FAQ: `mapper`가 props로 전달되는데, 이것은 무엇인가요?
 >
 > 답: 모달의 고유 이름과 모달 컴포넌트를 매핑한 형태입니다. 이후 예시에서 설명합니다.
 
@@ -101,7 +103,7 @@ import rootReducer from "./reducer";
 import rootSaga, { sagaMiddleware } from "./saga";
 import GlobalStyles from "./styles";
 
-import { GlobalModalProvider, ModalMapper } from "@cutehammond/modal";
+import { GlobalModalProvider, ModalMapper, createModalMapper } from "@cutehammond/modal";
 import { App } from "./App";
 
 const root = ReactDOM.createRoot(
@@ -119,8 +121,8 @@ const createStore = () => {
   return store;
 };
 
-const mapper: ModalMapper = () => ({
-});
+const mapper = createModalMapper(() => ({
+}));
 
 root.render(
   <Provider store={createStore()}>
@@ -150,7 +152,7 @@ root.render(
 
 > FAQ: 별도의 props를 전달하고 싶습니다. 이럴 땐 어떻게 해야 할까요?
 > 
-> 답: `CreateModalProps`의 `data prop`을 통해 전달해야 합니다.
+> 답: `ModalRequest`의 `data prop`을 통해 전달해야 합니다.
 >
 > (이후 API 문서를 통해 자세한 방법이 추가될 예정입니다.)
 
@@ -288,7 +290,7 @@ export const ConfirmButton = styled.div`
 
 ---
 
-- `CreateModalProps` 정의
+- `ModalRequest` 정의
 
 `useModal` Hook을 통해 모달을 생성하는데, 이때 모달의 정보를 전달하는 데 필요합니다.
 
@@ -303,11 +305,11 @@ export const ConfirmButton = styled.div`
 `info.props.tsx`
 
 ```tsx
-import { CreateModalProps } from "@cutehammond/modal/types";
+import { ModalRequest } from "@cutehammond/modal";
 
 export const INFO_MODAL = "info";
 
-export const getInfoModal = (): CreateModalProps => ({
+export const getInfoModal = (): ModalRequest => ({
   name: INFO_MODAL,
   data: {},
 });
@@ -320,9 +322,9 @@ export const getInfoModal = (): CreateModalProps => ({
 `index.tsx`
 
 ```tsx
-const mapper: ModalMapper = () => ({
+const mapper = createModalMapper(() => ({
   [INFO_MODAL]: InfoModal,
-});
+}));
 ```
 
 - `useModal`를 이용하여 create 함수 생성
@@ -338,7 +340,7 @@ import { useModal } from "@cutehammond/modal";
 import { getInfoModal } from "./demo/modal/info";
 
 export const App = () => {
-  const createInfoModal = useModal(getInfoModal());
+  const { create: createInfoModal } = useModal(getInfoModal());
 
   return (
     <div>
