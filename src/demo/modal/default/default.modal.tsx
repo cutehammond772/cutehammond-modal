@@ -1,7 +1,7 @@
 import * as React from "react";
+import { Modal } from "../../../lib";
 
 import * as Styled from "./default.styled";
-import { Modal } from "../../../lib";
 import { DefaultModalProps } from "./default.props";
 
 const DefaultModal = (props: DefaultModalProps) => (

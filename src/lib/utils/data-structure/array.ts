@@ -1,3 +1,4 @@
+import { error } from "../log";
 import { CopyOption, CopyOptions, Filter } from "./types";
 
 // copyOption을 통해 반환되는 배열의 복사 여부를 정할 수 있다. (기본 설정은 SWALLOW_COPY)
@@ -11,7 +12,7 @@ const applyCopy = <T>(array: Array<T>, copyOption: CopyOption) => {
       return [...array];
 
     default:
-      throw new Error("[SmartArray] 유효하지 않은 복사 옵션입니다.");
+      throw new Error(error("SmartArray", "유효하지 않은 복사 옵션입니다."));
   }
 };
 
@@ -25,10 +26,7 @@ const isPrimitive = (value: any) =>
 export const push =
   <T>(array?: Array<T>, copyOption?: CopyOption) =>
   (...elements: T[]) => {
-    const optional = applyCopy(
-      array || [],
-      copyOption || CopyOptions.SWALLOW_COPY
-    );
+    const optional = applyCopy(array || [], copyOption || CopyOptions.SWALLOW_COPY);
 
     optional.push(...elements);
     return optional;
@@ -47,25 +45,26 @@ export const push =
 // 만약 이를 인지하여 의도대로 결과가 일어날 수 있도록 따로 로직을 작성한 경우,
 // ignoreRefTypeError를 true로 설정하면 오류를 발생시키지 않고 그대로 수행한다.
 export const remove =
-  <T>(
-    array?: Array<T>,
-    copyOption?: CopyOption,
-    ignoreRefTypeError?: boolean
-  ) =>
+  <T>(array?: Array<T>, copyOption?: CopyOption, ignoreRefTypeError?: boolean) =>
   (filter?: Filter<T>, ...elements: T[]) => {
     if (!!elements && !isPrimitive(elements[0]) && !ignoreRefTypeError) {
-      throw new Error(`[SmartArray] 참조형 타입의 원소를 가진 배열의 삭제를 별다른 로직 없이 수행할 경우, 
+      throw new Error(
+        error(
+          "SmartArray",
+          `참조형 타입의 원소를 가진 배열의 삭제를 별다른 로직 없이 수행할 경우, 
       참조 값만을 비교하는 특성에 의해 의도치 않은 결과가 일어날 수 있습니다.
-      이를 인지하고 따로 대비했다면, ignoreRefTypeError를 true로 설정하세요.`);
+      이를 인지하고 따로 대비했다면, ignoreRefTypeError를 true로 설정하세요.`
+        )
+      );
     }
 
     switch (copyOption || CopyOptions.SWALLOW_COPY) {
       case CopyOptions.SWALLOW_COPY:
         return (array || [])
-          .filter(!!filter ? (e: T) => !filter(e) : ((_: T) => true))
+          .filter(!!filter ? (e: T) => !filter(e) : (_: T) => true)
           .filter((e: T) => !elements.includes(e));
 
       default:
-        throw new Error("[SmartArray] 유효하지 않은 복사 옵션입니다.");
+        throw new Error(error("SmartArray", "유효하지 않은 복사 옵션입니다."));
     }
   };

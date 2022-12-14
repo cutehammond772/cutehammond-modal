@@ -1,19 +1,8 @@
-import {
-  all,
-  call,
-  delay,
-  fork,
-  put,
-  race,
-  take,
-  takeEvery,
-} from "redux-saga/effects";
-import {
-  SagaActionTypes,
-  Actions as actions,
-  InternalActions as internal,
-} from "./redux";
-import { END_TRANSITION_TIMEOUT } from "./types";
+import { all, call, delay, fork, put, race, take, takeEvery } from "redux-saga/effects";
+import { SagaActionTypes, Actions as actions, InternalActions as internal } from "./redux";
+import { error } from "./utils";
+
+export const END_TRANSITION_TIMEOUT = 5000;
 
 // 모달 Transition이 끝날 때까지 기다린다.
 const waitEndTransition = function* (modalID: string) {
@@ -22,9 +11,7 @@ const waitEndTransition = function* (modalID: string) {
       SagaActionTypes.SAGA_RESPONSE_END_TRANSITION
     );
 
-    if (action.payload.modalID !== modalID) {
-      continue;
-    }
+    if (action.payload.modalID !== modalID) continue;
 
     break;
   }
@@ -50,9 +37,7 @@ const modalFlow = function* (action: ReturnType<typeof actions.createModal>) {
       SagaActionTypes.SAGA_REQUEST_REMOVE
     );
 
-    if (action.payload.modalID !== modalID) {
-      continue;
-    }
+    if (action.payload.modalID !== modalID) continue;
 
     // 먼저 모달을 닫는다.
     yield put(internal.closeModal({ modalID }));
@@ -65,7 +50,7 @@ const modalFlow = function* (action: ReturnType<typeof actions.createModal>) {
 
     if (!!timeout) {
       throw new Error(
-        "[modalFlow] 모달을 닫는 과정에서 Transition 지속 시간이 일정 시간을 초과했습니다."
+        error("Saga", "모달을 닫는 과정에서 Transition 지속 시간이 일정 시간을 초과했습니다.")
       );
     }
 

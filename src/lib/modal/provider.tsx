@@ -2,15 +2,12 @@ import * as React from "react";
 import { useCallback, PropsWithChildren } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { ModalMapper } from ".";
 import * as Styled from "./styled";
 
-import {
-  StaticSelectors as selectors,
-  Actions as actions,
-} from "../redux";
+import { StaticSelectors as selectors, Actions as actions } from "../redux";
+import { ModalMapperGenerator } from "./types";
 
-const GlobalModalProvider = (props: PropsWithChildren<{ mapper: ModalMapper }>) => {
+const GlobalModalProvider = (props: PropsWithChildren<{ mapper: ModalMapperGenerator }>) => {
   const dispatch = useDispatch();
   const info = useSelector(selectors.INFOS);
 
@@ -29,12 +26,7 @@ const GlobalModalProvider = (props: PropsWithChildren<{ mapper: ModalMapper }>) 
         const Modal = mapper[name];
 
         return (
-          <Modal
-            open={open}
-            modalID={modalID}
-            onClose={() => handleClose(modalID)}
-            key={modalID}
-          />
+          <Modal open={open} modalID={modalID} onClose={() => handleClose(modalID)} key={modalID} />
         );
       })}
     </Styled.GlobalModalProvider>

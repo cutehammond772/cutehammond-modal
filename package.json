@@ -1,6 +1,6 @@
 {
   "name": "@cutehammond/modal",
-  "version": "0.1.0-beta",
+  "version": "0.2.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": {
@@ -20,7 +20,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "directory": "git+https://github.com/cutehammond772/cutehammond-modal.git"
+    "directory": "https://github.com/cutehammond772/cutehammond-modal.git"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",

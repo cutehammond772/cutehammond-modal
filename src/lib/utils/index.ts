@@ -9,3 +9,6 @@ export { default as identity } from "./identity";
 
 // param-selector
 export { default as useParamSelector } from "./param-selector";
+
+// log
+export { info, error, warn } from "./log";
