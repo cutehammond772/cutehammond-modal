@@ -10,11 +10,9 @@
 
 > 이 기술 스택을 사용하여 프로젝트를 진행하는 분께 이 라이브러리를 추천합니다.
 
-- cra (create-react-app)
-- typescript
-- redux
-- redux-saga
-- emotion
+|<img height="128" width="128" src="https://cdn.simpleicons.org/createreactapp" />|<img height="128" width="128" src="https://cdn.simpleicons.org/typescript" />|<img height="128" width="128" src="https://cdn.simpleicons.org/redux" />|<img height="128" width="128" src="https://cdn.simpleicons.org/reduxsaga" />|<img height="128" width="128" src="https://raw.githubusercontent.com/emotion-js/emotion/main/emotion.png" />|
+|:---:|:---:|:---:|:---:|:---:|
+|**CRA** (create-react-app)|**Typescript**|**Redux-Toolkit**|**Redux-Saga**|**Emotion**|
 
 ## 라이브러리 설치하기
 
@@ -144,11 +142,11 @@ root.render(
 
 - 모달 컴포넌트 정의
 
-`<Modal />` 컴포넌트를 이용하여 커스텀 모달을 정의합니다.
+`<ModalBase />` 컴포넌트를 이용하여 커스텀 모달을 정의합니다.
 
 이때 layout prop을 통해 모달의 레이아웃을 직접 정의할 수 있습니다.
 
-> **이때, 컴포넌트의 props는 무조건 `CustomModalProps`여야 합니다.**
+> **이때, 컴포넌트의 props는 무조건 `ModalProps`여야 합니다.**
 
 > FAQ: 별도의 props를 전달하고 싶습니다. 이럴 땐 어떻게 해야 할까요?
 > 
@@ -160,13 +158,13 @@ root.render(
 
 ```tsx
 import * as React from "react";
-import { CustomModalProps, Modal } from "@cutehammond/modal";
+import { ModalProps, Modal } from "@cutehammond/modal";
 
 import * as Styled from "./info.styled";
 
-const InfoModal = (props: CustomModalProps) => {
+const InfoModal = (props: ModalProps) => {
   return (
-    <Modal layout={Styled.Layout} {...props}>
+    <ModalBase layout={Styled.Layout} {...props}>
       <Styled.Container>
         <Styled.Title>정보</Styled.Title>
         <Styled.Content>햄찌는 귀엽습니다.</Styled.Content>

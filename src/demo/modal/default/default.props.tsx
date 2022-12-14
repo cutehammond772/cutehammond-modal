@@ -1,5 +1,3 @@
-import { CustomModalProps } from "../../../lib";
+import { ModalProps } from "../../../lib";
 
-export interface DefaultModalProps
-  extends React.PropsWithChildren,
-    CustomModalProps {}
+export interface DefaultModalProps extends React.PropsWithChildren<ModalProps> {}
