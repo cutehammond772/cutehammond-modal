@@ -1,4 +1,4 @@
-import { CreateModalProps } from "../../../lib/types";
+import { ModalRequest } from "../../../lib";
 
 // banner
 export interface UserBannerProps {
@@ -30,10 +30,8 @@ export interface ProfileData {
   userName: string;
 }
 
-export const getProfile = (
-  userName: string
-): CreateModalProps<ProfileData> => ({
-  name: "profile",
+export const getProfile = (userName: string): ModalRequest<ProfileData> => ({
+  name: PROFILE_MODAL,
   data: {
     userName,
   },

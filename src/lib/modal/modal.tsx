@@ -31,7 +31,7 @@ const Modal = (props: ModalProps) => {
       if (!props.open) {
         dispatch(internal.responseEnd({ modalID: props.modalID }));
       }
-    }, props.duration || DEFAULT_DURATION);
+    }, props.duration ?? DEFAULT_DURATION);
 
     return () => clearTimeout(transitionID.current);
   }, [dispatch, props]);

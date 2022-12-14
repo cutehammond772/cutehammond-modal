@@ -6,15 +6,11 @@ import { DefaultModal } from "../default";
 import { GuestBanner, NotificationBanner, UserBanner } from "./banner";
 
 import { GuestMenu } from "./menu";
-import { CustomModalProps } from "../../../lib";
-import { DynamicSelectors as dynamic } from "../../../lib/redux";
-import { useParamSelector } from "../../../lib/utils";
+import { CustomModalProps, useModalData } from "../../../lib";
 import { ProfileData } from "./profile.props";
 
 const ProfileModal = (props: CustomModalProps) => {
-  const profile = useParamSelector(dynamic.DATA, props.modalID) as
-    | ProfileData
-    | undefined;
+  const { data: profile } = useModalData<ProfileData>(props.modalID);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
