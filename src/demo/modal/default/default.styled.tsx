@@ -18,6 +18,8 @@ export const Modal = css`
     overflow-y: auto;
     padding: 30px;
 
+    box-sizing: border-box;
+
     ::-webkit-scrollbar {
       display: none;
     }

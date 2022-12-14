@@ -6,10 +6,10 @@ import { DefaultModal } from "../default";
 import { GuestBanner, NotificationBanner, UserBanner } from "./banner";
 
 import { GuestMenu } from "./menu";
-import { CustomModalProps, useModalData } from "../../../lib";
+import { ModalProps, useModalData } from "../../../lib";
 import { ProfileData } from "./profile.props";
 
-const ProfileModal = (props: CustomModalProps) => {
+const ProfileModal = (props: ModalProps) => {
   const { data: profile } = useModalData<ProfileData>(props.modalID);
   const containerRef = useRef<HTMLDivElement>(null);
 
