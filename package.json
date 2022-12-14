@@ -20,7 +20,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "directory": "git+https://github.com/cutehammond772/cutehammond-modal.git"
+    "directory": "https://github.com/cutehammond772/cutehammond-modal.git"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",

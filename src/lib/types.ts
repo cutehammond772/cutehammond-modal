@@ -10,7 +10,7 @@ export type AnyProps = { [key: string]: any };
 export type ModalInfo = { name: string; open: boolean };
 
 // hook.ts
-export interface CreateModalProps<T extends AnyProps> {
+export interface CreateModalProps<T extends AnyProps = {}> {
   name: string;
   data: T;
 }
