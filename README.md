@@ -322,7 +322,7 @@ export const getInfoModal = (): ModalRequest => ({
 `index.tsx`
 
 ```tsx
-const mapper: ModalMapper = createModalMapper(() => ({
+const mapper = createModalMapper(() => ({
   [INFO_MODAL]: InfoModal,
 }));
 ```
