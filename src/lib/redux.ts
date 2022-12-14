@@ -1,10 +1,12 @@
 import { createAction, createReducer, createSelector } from "@reduxjs/toolkit";
-import { LIBRARY_NAME } from ".";
 
-import { AnyProps, ModalInfo, ReduxState } from "./types";
-import { map, identity, CopyOptions } from "./utils";
+import { map, identity, CopyOptions, error } from "./utils";
 
 export const REDUCER_NAME = "@cutehammond/modal";
+
+export type ReduxState = { [name: string]: any; modal: ModalState };
+export type AnyProps = { [key: string]: any };
+export type ModalInfo = { name: string; open: boolean };
 
 export interface ModalState {
   data: { [modalID: string]: AnyProps };
@@ -85,7 +87,7 @@ const modalReducer = createReducer(initialState, {
   [ReducerActionTypes.CLOSE]: (state, action: ReturnType<typeof InternalActions.closeModal>) =>
     void map.replace(state.info, CopyOptions.COPY_NOTHING)((info) => {
       if (!info) {
-        throw new Error(`[${LIBRARY_NAME}] [Redux] 존재하지 않는 modal에 대해 close를 요청했습니다.`);
+        throw new Error(error("Redux", "존재하지 않는 modal에 대해 close를 요청했습니다."));
       }
 
       return { ...info, open: false };

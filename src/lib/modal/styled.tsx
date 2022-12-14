@@ -3,6 +3,7 @@ import { css, SerializedStyles } from "@emotion/react";
 import styled from "@emotion/styled";
 
 import { ModalTransition, ModalTransitions, TransitionProps } from ".";
+import { createTransitionProps } from "../creator";
 
 export const GlobalModalProvider = styled.div`
   position: relative;
@@ -37,8 +38,7 @@ export const Backdrop = styled.div<{
     }
   }};
 
-  visibility: ${(props) =>
-    props.state === ModalTransitions.EXITED ? "hidden" : "visible"};
+  visibility: ${(props) => (props.state === ModalTransitions.EXITED ? "hidden" : "visible")};
 `;
 
 export const Modal = styled.div<{
@@ -51,11 +51,10 @@ export const Modal = styled.div<{
   ${(props) => props.customTransition.transitions[props.state]};
   ${(props) => props.customTransition.durations};
 
-  visibility: ${(props) =>
-    props.state === ModalTransitions.EXITED ? "hidden" : "visible"};
+  visibility: ${(props) => (props.state === ModalTransitions.EXITED ? "hidden" : "visible")};
 `;
 
-export const DefaultTransition = (): TransitionProps => ({
+export const DefaultTransition = createTransitionProps(() => ({
   transitions: {
     [ModalTransitions.ENTERING]: css`
       opacity: 1;
@@ -73,4 +72,4 @@ export const DefaultTransition = (): TransitionProps => ({
   durations: css`
     transition: opacity 300ms;
   `,
-});
+}));

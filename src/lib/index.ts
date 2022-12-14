@@ -6,8 +6,10 @@ export { Modal, GlobalModalProvider, ModalTransitions } from "./modal";
 
 export type { CustomModalProps, TransitionProps, ModalTransition, ModalMapper } from "./modal";
 
-export { default as useModal } from "./hook";
+export { useModal, useModalData } from "./hook";
 
-export type { CreateModalProps } from "./types";
+export type { ModalRequest } from "./hook";
+
+export { createModalMapper, createTransitionProps } from "./creator";
 
 export const LIBRARY_NAME = "@cutehammond/modal";

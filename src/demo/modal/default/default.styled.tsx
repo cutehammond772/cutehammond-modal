@@ -1,7 +1,7 @@
 /** @jsxImportSource '@emotion/react' */
 import { css } from "@emotion/react";
 
-import { ModalTransitions, TransitionProps } from "../../../lib";
+import { createTransitionProps, ModalTransitions } from "../../../lib";
 
 export const Modal = css`
   z-index: var(--z-header-tab);
@@ -85,7 +85,7 @@ const ModalCloseTransition = css`
   }
 `;
 
-export const Transition = (): TransitionProps => ({
+export const Transition = createTransitionProps(() => ({
   transitions: {
     [ModalTransitions.ENTERING]: ModalOpenTransition,
     [ModalTransitions.ENTERED]: ModalOpenTransition,
@@ -96,4 +96,4 @@ export const Transition = (): TransitionProps => ({
   durations: css`
     transition: opacity 300ms, transform 500ms;
   `,
-});
+}));
