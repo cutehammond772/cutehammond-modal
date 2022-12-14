@@ -11,7 +11,7 @@ const GlobalModalProvider = (props: PropsWithChildren<{ mapper: ModalMapperGener
   const dispatch = useDispatch();
   const info = useSelector(selectors.INFOS);
 
-  const handleClose = useCallback(
+  const closeHandler = useCallback(
     (modalID: string) => dispatch(actions.removeModal({ modalID })),
     [dispatch]
   );
@@ -26,7 +26,7 @@ const GlobalModalProvider = (props: PropsWithChildren<{ mapper: ModalMapperGener
         const Modal = mapper[name];
 
         return (
-          <Modal open={open} modalID={modalID} onClose={() => handleClose(modalID)} key={modalID} />
+          <Modal open={open} modalID={modalID} onClose={() => closeHandler(modalID)} key={modalID} />
         );
       })}
     </Styled.GlobalModalProvider>
