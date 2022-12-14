@@ -3,7 +3,7 @@ import { SerializedStyles } from "@emotion/react";
 
 import { ModalTransition } from ".";
 
-// Custom Modal을 만들 때 이를 통해 Transition Animation을 커스텀할 수 있다.
+// Modal을 만들 때 이를 통해 Transition Animation을 커스텀할 수 있다.
 export interface TransitionProps {
   // 각 ModalTransition마다 요소의 스타일을 설정한다.
   transitions: { [type in ModalTransition]: SerializedStyles };

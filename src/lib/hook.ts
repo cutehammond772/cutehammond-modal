@@ -14,7 +14,7 @@ const useModal = <T extends AnyProps>(props: CreateModalProps<T>) => {
     [dispatch, props]
   );
 
-  return create;
+  return { create };
 };
 
 export default useModal;

@@ -4,9 +4,9 @@ import { getProfile } from "./demo/modal/profile";
 import { useModal } from "./lib";
 
 export const App = () => {
-  const createProfileModal = useModal(getProfile("cutehammond"));
-  const createGuestModal = useModal(getProfile(""));
-  const createInfoModal = useModal(getInfoModal());
+  const { create: createProfileModal } = useModal(getProfile("cutehammond"));
+  const { create: createGuestModal } = useModal(getProfile(""));
+  const { create: createInfoModal } = useModal(getInfoModal());
 
   return (
     <div>

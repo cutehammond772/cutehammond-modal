@@ -1,4 +1,5 @@
 import { createAction, createReducer, createSelector } from "@reduxjs/toolkit";
+import { LIBRARY_NAME } from ".";
 
 import { AnyProps, ModalInfo, ReduxState } from "./types";
 import { map, identity, CopyOptions } from "./utils";
@@ -41,13 +42,8 @@ export const ReducerActionTypes = {
 
 // hook 또는 외부 로직에서의 요청
 export const Actions = {
-  createModal: createAction<{ name: string; data: AnyProps }>(
-    SagaActionTypes.SAGA_CREATE
-  ),
-
-  removeModal: createAction<{ modalID: string }>(
-    SagaActionTypes.SAGA_REQUEST_REMOVE
-  ),
+  createModal: createAction<{ name: string; data: AnyProps }>(SagaActionTypes.SAGA_CREATE),
+  removeModal: createAction<{ modalID: string }>(SagaActionTypes.SAGA_REQUEST_REMOVE),
 } as const;
 
 // saga 로직 등 내부 로직에서의 요청
@@ -59,22 +55,16 @@ export const InternalActions = {
   }>(ReducerActionTypes.CREATE),
 
   closeModal: createAction<{ modalID: string }>(ReducerActionTypes.CLOSE),
-
   removeModal: createAction<{ modalID: string }>(ReducerActionTypes.REMOVE),
-
-  responseEnd: createAction<{ modalID: string }>(
-    SagaActionTypes.SAGA_RESPONSE_END_TRANSITION
-  ),
+  responseEnd: createAction<{ modalID: string }>(SagaActionTypes.SAGA_RESPONSE_END_TRANSITION),
 } as const;
 
 const modalIDFn = (_: ReduxState, modalID: string) => modalID;
-
 const dataSelector = (state: ReduxState) => state.modal.data;
 const infoSelector = (state: ReduxState) => state.modal.info;
 
 export const DynamicSelectors = {
-  DATA: () =>
-    createSelector([dataSelector, modalIDFn], (data, modalID) => data[modalID]),
+  DATA: () => createSelector([dataSelector, modalIDFn], (data, modalID) => data[modalID]),
 } as const;
 
 export const StaticSelectors = {
@@ -82,10 +72,7 @@ export const StaticSelectors = {
 } as const;
 
 const modalReducer = createReducer(initialState, {
-  [ReducerActionTypes.CREATE]: (
-    state,
-    action: ReturnType<typeof InternalActions.createModal>
-  ) => {
+  [ReducerActionTypes.CREATE]: (state, action: ReturnType<typeof InternalActions.createModal>) => {
     const { name, data, modalID } = action.payload;
 
     map.put(state.data, CopyOptions.COPY_NOTHING)(modalID, data);
@@ -95,24 +82,16 @@ const modalReducer = createReducer(initialState, {
     });
   },
 
-  [ReducerActionTypes.CLOSE]: (
-    state,
-    action: ReturnType<typeof InternalActions.closeModal>
-  ) =>
+  [ReducerActionTypes.CLOSE]: (state, action: ReturnType<typeof InternalActions.closeModal>) =>
     void map.replace(state.info, CopyOptions.COPY_NOTHING)((info) => {
       if (!info) {
-        throw new Error(
-          `[${REDUCER_NAME}] 존재하지 않는 modal에 대해 close를 요청했습니다.`
-        );
+        throw new Error(`[${LIBRARY_NAME}] [Redux] 존재하지 않는 modal에 대해 close를 요청했습니다.`);
       }
 
       return { ...info, open: false };
     }, action.payload.modalID),
 
-  [ReducerActionTypes.REMOVE]: (
-    state,
-    action: ReturnType<typeof InternalActions.removeModal>
-  ) => {
+  [ReducerActionTypes.REMOVE]: (state, action: ReturnType<typeof InternalActions.removeModal>) => {
     state.data = map.remove(state.data)(action.payload.modalID);
     state.info = map.remove(state.info)(action.payload.modalID);
   },
