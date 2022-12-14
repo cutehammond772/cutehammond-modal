@@ -7,13 +7,13 @@ import {
   DEFAULT_DURATION,
   ModalTransition,
   ModalTransitions as transitions,
-  ModalProps,
+  ModalBaseProps,
 } from ".";
 
 import { InternalActions as internal } from "../redux";
 
-// 모달 컴포넌트이다.
-const Modal = (props: ModalProps) => {
+// 모달 컴포넌트를 만들기 위한 베이스 컴포넌트이다.
+const ModalBase = (props: ModalBaseProps) => {
   const dispatch = useDispatch();
 
   const transitionID = useRef<NodeJS.Timeout>();
@@ -61,4 +61,4 @@ const Modal = (props: ModalProps) => {
   );
 };
 
-export default Modal;
+export default ModalBase;

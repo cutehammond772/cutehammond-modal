@@ -1,9 +1,9 @@
 import * as React from "react";
-import { CustomModalProps, Modal } from "../../../lib";
+import { ModalProps, Modal } from "../../../lib";
 
 import * as Styled from "./info.styled";
 
-const InfoModal = (props: CustomModalProps) => {
+const InfoModal = (props: ModalProps) => {
   return (
     <Modal layout={Styled.Layout} {...props}>
       <Styled.Container>

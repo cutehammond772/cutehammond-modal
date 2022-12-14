@@ -17,7 +17,7 @@ const waitEndTransition = function* (modalID: string) {
   }
 };
 
-// FLOW:
+// 모달 흐름:
 // 1. 모달 생성: SAGA_CREATE => CREATE
 // 2. 모달 삭제: SAGA_REQUEST_REMOVE => CLOSE => SAGA_RESPONSE_END_TRANSITION => REMOVE
 const modalFlow = function* (action: ReturnType<typeof actions.createModal>) {
@@ -29,7 +29,7 @@ const modalFlow = function* (action: ReturnType<typeof actions.createModal>) {
   // 모달을 생성한다.
   yield put(internal.createModal({ name, data, modalID }));
 
-  /* 모달이 보이는 중 */
+  /* 모달 활성화 상태 */
 
   // 이 modalID에 대한 모달 삭제 요청을 받는다.
   while (true) {
