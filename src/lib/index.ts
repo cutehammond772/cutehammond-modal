@@ -2,14 +2,26 @@ export { default as modalSaga } from "./saga";
 
 export { default as modalReducer } from "./redux";
 
-export { Modal, GlobalModalProvider, ModalTransitions } from "./modal";
+export type { Duration } from "./redux";
 
-export type { ModalProps, TransitionProps, ModalTransition, ModalMapper } from "./modal";
+export { ModalBase, GlobalModalProvider, ModalTransitions } from "./modal";
 
-export { useModal, useModalData } from "./hook";
+export type {
+  ModalProps,
+  ModalBaseProps,
+  TransitionProps,
+  ModalTransition,
+  ModalMapper,
+} from "./modal";
+
+export * as consts from "./consts";
+
+export { useModal, useModalData, useModalInfo } from "./hook";
 
 export type { ModalRequest } from "./hook";
 
 export { createModalMapper, createTransitionProps } from "./creator";
 
-export const LIBRARY_NAME = "@cutehammond/modal";
+// consts
+export { MODAL_TIMEOUT } from "./saga";
+export { TRANSITION_DURATION } from "./redux";
