@@ -1,5 +1,7 @@
-import { error } from "../log";
+import { msg } from "../log";
 import { CopyOption, CopyOptions, IndexSignatureMap, ReplaceFunction } from "./types";
+
+const logMsg = msg("IndexSignatureMap");
 
 // 특정한 원소를 수정합니다. 이때, 존재하지 않는 경우 put과 동일한 기능을 가집니다.
 export const replace =
@@ -17,7 +19,7 @@ export const replace =
           }, {} as IndexSignatureMap<T>);
 
         default:
-          throw new Error(error("IndexSignatureMap", "유효하지 않은 복사 옵션입니다."));
+          throw new Error(logMsg.error("유효하지 않은 복사 옵션입니다."));
       }
     })();
 
@@ -46,7 +48,7 @@ export const put =
         return copied;
 
       default:
-        throw new Error(error("IndexSignatureMap", "유효하지 않은 복사 옵션입니다."));
+        throw new Error(logMsg.error("유효하지 않은 복사 옵션입니다."));
     }
   };
 
@@ -62,6 +64,6 @@ export const remove =
         }, {} as IndexSignatureMap<T>);
 
       default:
-        throw new Error(error("IndexSignatureMap", "유효하지 않은 복사 옵션입니다."));
+        throw new Error(logMsg.error("유효하지 않은 복사 옵션입니다."));
     }
   };
