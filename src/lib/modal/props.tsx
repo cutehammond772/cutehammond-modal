@@ -19,9 +19,6 @@ export interface TransitionProps {
 // 모달의 정보를 나타낸다.
 // 아래의 모든 property는 내부 로직에서 관리한다.
 export interface ModalProps {
-  // 이 모달이 열린 여부를 나타낸다.
-  open: boolean;
-
   // 이 모달의 고유 ID이다.
   modalID: string;
 
@@ -45,7 +42,4 @@ export interface ModalBaseProps extends React.PropsWithChildren<ModalProps> {
 
   // 모달의 Transition을 커스터마이징할 수 있다.
   transition?: TransitionProps;
-
-  // 모달의 Transition 지속 시간을 설정한다. 기본값은 500(ms)이다.
-  duration?: number;
 }

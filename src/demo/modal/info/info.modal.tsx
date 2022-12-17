@@ -1,11 +1,11 @@
 import * as React from "react";
-import { ModalProps, Modal } from "../../../lib";
+import { ModalProps, ModalBase } from "../../../lib";
 
 import * as Styled from "./info.styled";
 
 const InfoModal = (props: ModalProps) => {
   return (
-    <Modal layout={Styled.Layout} {...props}>
+    <ModalBase layout={Styled.Layout} {...props}>
       <Styled.Container>
         <Styled.Title>정보</Styled.Title>
         <Styled.Content>햄찌는 귀엽습니다.</Styled.Content>
@@ -13,7 +13,7 @@ const InfoModal = (props: ModalProps) => {
           확인
         </Styled.ConfirmButton>
       </Styled.Container>
-    </Modal>
+    </ModalBase>
   );
 };
 

@@ -4,16 +4,18 @@ import styled from "@emotion/styled";
 
 import { ModalTransition, ModalTransitions, TransitionProps } from ".";
 import { createTransitionProps } from "../creator";
+import { Duration } from "../redux";
 
 export const GlobalModalProvider = styled.div`
-  position: relative;
+  position: absolute;
+
   width: 100%;
   height: 100%;
 `;
 
 export const Backdrop = styled.div<{
   noBackdrop: boolean;
-  duration: number;
+  duration: Duration;
   state: ModalTransition;
 }>`
   position: fixed;
@@ -22,9 +24,20 @@ export const Backdrop = styled.div<{
 
   width: 100%;
   height: 100%;
-
-  transition: ${(props) => `backdrop-filter ${props.duration}ms`};
   z-index: var(--z-modal);
+
+  transition: backdrop-filter
+    ${(props) => {
+      switch (props.state) {
+        case ModalTransitions.ENTERING:
+        case ModalTransitions.ENTERED:
+          return props.duration.open;
+
+        case ModalTransitions.EXITING:
+        case ModalTransitions.EXITED:
+          return props.duration.close;
+      }
+    }}ms;
 
   backdrop-filter: ${(props) => {
     switch (props.state) {
@@ -41,20 +54,19 @@ export const Backdrop = styled.div<{
   visibility: ${(props) => (props.state === ModalTransitions.EXITED ? "hidden" : "visible")};
 `;
 
-export const Modal = styled.div<{
+export const ModalBase = styled.div<{
   layout: SerializedStyles;
   state: ModalTransition;
-  customTransition: TransitionProps;
+  transitionProps: TransitionProps;
 }>`
   ${(props) => props.layout};
-
-  ${(props) => props.customTransition.transitions[props.state]};
-  ${(props) => props.customTransition.durations};
+  ${(props) => props.transitionProps.transitions[props.state]};
+  ${(props) => props.transitionProps.durations};
 
   visibility: ${(props) => (props.state === ModalTransitions.EXITED ? "hidden" : "visible")};
 `;
 
-export const DefaultTransition = createTransitionProps(() => ({
+export const defaultTransition = createTransitionProps(() => ({
   transitions: {
     [ModalTransitions.ENTERING]: css`
       opacity: 1;
@@ -69,6 +81,7 @@ export const DefaultTransition = createTransitionProps(() => ({
       opacity: 0;
     `,
   },
+
   durations: css`
     transition: opacity 300ms;
   `,

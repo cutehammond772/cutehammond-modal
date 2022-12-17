@@ -6,6 +6,21 @@ import "@fontsource/inter/500.css";
 import "@fontsource/noto-sans-kr/500.css";
 
 const style = css`
+  html, body {
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
   html * {
     font-family: "Inter", "Noto Sans KR", sans-serif !important;
     user-select: none;
@@ -18,12 +33,12 @@ const style = css`
     --dark: #303030;
 
     --shadow: #aaaaaa;
-    
+
     --red: red;
     --pink: pink;
     --blue: skyblue;
     --purple: #9a19b4;
-    
+
     --success: #17ac1e;
     --primary: #4141dd;
     --sub: #707070;
@@ -40,22 +55,6 @@ const style = css`
     --tablet: 768px;
     --mobile: 576px;
   }
-
-  html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-
-    position: relative;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    
-    ::-webkit-scrollbar {
-      display: none;
-    }
-  }
-
 `;
 
 const GlobalStyles = () => {
