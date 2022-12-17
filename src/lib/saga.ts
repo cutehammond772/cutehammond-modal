@@ -32,7 +32,7 @@ const modalFlow = function* (action: ReturnType<typeof actions.createModal>) {
   // 모달이 열리는 과정을 수행한다.
   yield call(handleOpen, modalID, duration || initialDuration);
 
-  /* 모달이 보이는 중 */
+  /* 모달 활성화 상태 */
 
   // 모달 삭제 요청을 받을 때까지 기다린다.
   yield call(waitDeletion, modalID);
