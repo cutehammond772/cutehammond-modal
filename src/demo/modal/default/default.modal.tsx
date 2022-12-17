@@ -1,19 +1,12 @@
 import * as React from "react";
-import { Modal } from "../../../lib";
+import { ModalBase, ModalBaseProps } from "../../../lib";
 
 import * as Styled from "./default.styled";
-import { DefaultModalProps } from "./default.props";
 
-const DefaultModal = (props: DefaultModalProps) => (
-  <Modal
-    open={props.open}
-    onClose={props.onClose}
-    layout={Styled.Modal}
-    transition={Styled.Transition()}
-    modalID={props.modalID}
-  >
+const DefaultModal = (props: Omit<ModalBaseProps, "layout" | "transition">) => (
+  <ModalBase layout={Styled.Modal} transition={Styled.Transition()} {...props}>
     <div className="container">{props.children}</div>
-  </Modal>
+  </ModalBase>
 );
 
 export default React.memo(DefaultModal);

@@ -1,5 +1,7 @@
-import { error } from "../log";
+import { msg } from "../log";
 import { CopyOption, CopyOptions, Filter } from "./types";
+
+const logMsg = msg("SmartArray");
 
 // copyOption을 통해 반환되는 배열의 복사 여부를 정할 수 있다. (기본 설정은 SWALLOW_COPY)
 // 1. COPY_NOTHING: 어떤 복사도 하지 않고 배열 참조를 그대로 반환한다.
@@ -12,7 +14,7 @@ const applyCopy = <T>(array: Array<T>, copyOption: CopyOption) => {
       return [...array];
 
     default:
-      throw new Error(error("SmartArray", "유효하지 않은 복사 옵션입니다."));
+      throw new Error(logMsg.error("유효하지 않은 복사 옵션입니다."));
   }
 };
 
@@ -49,11 +51,10 @@ export const remove =
   (filter?: Filter<T>, ...elements: T[]) => {
     if (!!elements && !isPrimitive(elements[0]) && !ignoreRefTypeError) {
       throw new Error(
-        error(
-          "SmartArray",
+        logMsg.error(
           `참조형 타입의 원소를 가진 배열의 삭제를 별다른 로직 없이 수행할 경우, 
-      참조 값만을 비교하는 특성에 의해 의도치 않은 결과가 일어날 수 있습니다.
-      이를 인지하고 따로 대비했다면, ignoreRefTypeError를 true로 설정하세요.`
+          참조 값만을 비교하는 특성에 의해 의도치 않은 결과가 일어날 수 있습니다. 
+          이를 인지하고 따로 대비했다면, ignoreRefTypeError를 true로 설정하세요.`
         )
       );
     }
@@ -65,6 +66,6 @@ export const remove =
           .filter((e: T) => !elements.includes(e));
 
       default:
-        throw new Error(error("SmartArray", "유효하지 않은 복사 옵션입니다."));
+        throw new Error(logMsg.error("유효하지 않은 복사 옵션입니다."));
     }
   };

@@ -20,11 +20,7 @@ const ProfileModal = (props: ModalProps) => {
   }, [props.open]);
 
   return (
-    <DefaultModal
-      open={props.open}
-      onClose={props.onClose}
-      modalID={props.modalID}
-    >
+    <DefaultModal {...props}>
       <Styled.Tab ref={containerRef}>
         {!profile?.userName ? (
           <>

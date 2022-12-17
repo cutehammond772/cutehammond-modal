@@ -2,6 +2,8 @@
 
 이 라이브러리는 커뮤니티 `Pill`에서 사용하고 있는 커스텀 모달 라이브러리입니다.
 
+> 이 Readme는 v0.3.0를 기준으로 작성되었습니다.
+
 [![npm version](https://img.shields.io/npm/v/@cutehammond/modal.svg?style=flat-square)](https://www.npmjs.com/package/@cutehammond/modal)
 
 # 시작하기
@@ -172,7 +174,7 @@ const InfoModal = (props: ModalProps) => {
           확인
         </Styled.ConfirmButton>
       </Styled.Container>
-    </Modal>
+    </ModalBase>
   );
 };
 
