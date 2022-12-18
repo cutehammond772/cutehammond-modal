@@ -1,12 +1,7 @@
 import { useCallback } from "react";
 
-<<<<<<< HEAD
 import { Actions as actions, AnyProps, DynamicSelectors as dynamic, ModalInfo, useAppDispatch } from "./redux";
 import { useDynamicSelector } from "./utils";
-=======
-import { Actions as actions, AnyProps, DynamicSelectors as dynamic, ModalInfo } from "./redux";
-import { useParamSelector } from "./utils";
->>>>>>> 0329976a0dce5d611d1e34a746847cc5260373e9
 
 export interface ModalRequest<T extends AnyProps = {}> {
   name: string;
@@ -32,11 +27,7 @@ export const useModalData = <T extends AnyProps>(modalID: string) => {
 
 // 모달의 정보를 가져오는 Hook이다.
 export const useModalInfo = (modalID: string) => {
-<<<<<<< HEAD
   const info = useDynamicSelector(dynamic.INFO, modalID) as ModalInfo | undefined;
-=======
-  const info = useParamSelector(dynamic.INFO, modalID) as ModalInfo | undefined;
->>>>>>> 0329976a0dce5d611d1e34a746847cc5260373e9
 
   return { info };
 };
