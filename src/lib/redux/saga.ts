@@ -1,20 +1,17 @@
 import { all, call, delay, fork, put, race, takeEvery } from "redux-saga/effects";
 
-import { takeExact, msg } from "./utils";
-import { ModalTransitions } from ".";
 import {
   ReducerActions,
   SagaActions,
   Actions as actions,
   InternalActions as internal,
-  initialDuration,
-  Duration,
-} from "./redux";
+} from "./actions";
+import { initialDuration } from "./reducer";
+import { Duration, MODAL_TIMEOUT } from "./types";
+import { takeExact, msg } from "../utils";
+import { ModalTransitions } from "../modal";
 
 const logMsg = msg("Saga");
-
-// 모달의 내부 행위에 대한 타임아웃이다. (5000 ms)
-export const MODAL_TIMEOUT = 5000;
 
 // 모달의 생명 주기를 관리한다.
 const modalFlow = function* (action: ReturnType<typeof actions.createModal>) {

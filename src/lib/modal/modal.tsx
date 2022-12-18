@@ -1,10 +1,12 @@
 import * as React from "react";
 
 import * as Styled from "./styled";
-import { ModalBaseProps } from ".";
 
-import { ModalTransitions, useModalInfo } from "..";
+import { ModalBaseProps } from "./props";
+import { ModalTransitions } from "./types";
+
 import { initialDuration } from "../redux";
+import { useModalInfo } from "../hook";
 
 // 모달 컴포넌트를 만들기 위한 베이스 컴포넌트이다.
 const ModalBase = (props: ModalBaseProps) => {
@@ -24,8 +26,6 @@ const ModalBase = (props: ModalBaseProps) => {
   if (!!props.dialog) {
     return modal;
   }
-
-  console.log(info?.state);
 
   return (
     <Styled.Backdrop

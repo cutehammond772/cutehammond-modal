@@ -6,4 +6,9 @@ export { default as GlobalModalProvider } from "./provider";
 
 export { ModalTransitions } from "./types";
 
-export type { ModalTransition, ModalMapper } from "./types";
+export type {
+  ModalTransition,
+  ModalMapper,
+  ModalMapperGenerator,
+  TransitionPropsGenerator,
+} from "./types";
