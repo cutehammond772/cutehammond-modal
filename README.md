@@ -2,7 +2,7 @@
 
 이 라이브러리는 커뮤니티 `Pill`에서 사용하고 있는 커스텀 모달 라이브러리입니다.
 
-> 이 Readme는 v0.3.0를 기준으로 작성되었습니다.
+> 이 Readme는 v0.4.0를 기준으로 작성되었습니다.
 
 [![npm version](https://img.shields.io/npm/v/@cutehammond/modal.svg?style=flat-square)](https://www.npmjs.com/package/@cutehammond/modal)
 
@@ -32,56 +32,7 @@ $ yarn add @cutehammond/modal
 
 # 튜토리얼
 
-> redux, redux-saga가 기본적으로 세팅되어 있어야 합니다.
-
-## 초기 설정
-
-- reducer 추가하기
-
-rootReducer에 `modalReducer`를 추가합니다.
-
-> **단, rootReducer 내의 property 이름은 무조건 `modal`이어야 합니다.**
-
-`reducer.ts`
-
-```ts
-import { combineReducers } from "redux";
-import modalReducer from "@cutehammond/modal";
-
-const rootReducer = combineReducers({
-  modal: modalReducer,
-});
-
-type RootState = ReturnType<typeof rootReducer>;
-
-export type { RootState };
-export default rootReducer;
-```
-
----
-
-- saga 추가하기
-
-rootSaga에 `modalSaga`를 추가합니다.
-
-`saga.ts`
-
-```ts
-import { all, fork } from "redux-saga/effects";
-import createSagaMiddleware from "redux-saga";
-
-import modalSaga from "@cutehammond/modal";
-
-export const sagaMiddleware = createSagaMiddleware();
-
-export default function* rootSaga() {
-  yield all([fork(modalSaga)]);
-}
-```
-
----
-
-- `GlobalModalProvider` 등록하기
+## 1. `GlobalModalProvider` 등록하기
 
 이 React app이 모달을 받을 수 있도록 `<App />` 바깥을 감싸도록 합니다.
 
@@ -96,45 +47,30 @@ export default function* rootSaga() {
 ```tsx
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { configureStore } from "@reduxjs/toolkit";
-import { Provider } from "react-redux";
-
-import rootReducer from "./reducer";
-import rootSaga, { sagaMiddleware } from "./saga";
 import GlobalStyles from "./styles";
 
-import { GlobalModalProvider, ModalMapper, createModalMapper } from "@cutehammond/modal";
+import { GlobalModalProvider, createModalMapper } from "@cutehammond/modal";
 import { App } from "./App";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-const createStore = () => {
-  const store = configureStore({
-    reducer: rootReducer,
-    devTools: process.env.NODE_ENV !== "production",
-    middleware: [sagaMiddleware],
-  });
-
-  sagaMiddleware.run(rootSaga);
-  return store;
-};
-
 const mapper = createModalMapper(() => ({
+  // Some Modal Mappings
 }));
 
 root.render(
-  <Provider store={createStore()}>
+  <>
     <GlobalStyles />
     <GlobalModalProvider mapper={mapper}>
       <App />
     </GlobalModalProvider>
-  </Provider>
+  </>
 );
 ```
 
-## 모달 만들기
+## 2. 모달 만들기
 
 이제 초기 설정은 끝났습니다. 예시로 간단한 정보를 전달하는 모달을 만들어 보겠습니다.
 
