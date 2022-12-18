@@ -5,10 +5,17 @@ import styled from "@emotion/styled";
 import { ModalTransition, ModalTransitions, TransitionProps } from ".";
 import { createTransitionProps } from "../creator";
 import { Duration } from "../redux";
+<<<<<<< HEAD
 
 export const ModalContainer = styled.div`
   position: absolute;
 
+=======
+
+export const GlobalModalProvider = styled.div`
+  position: absolute;
+
+>>>>>>> 0329976a0dce5d611d1e34a746847cc5260373e9
   width: 100%;
   height: 100%;
 `;

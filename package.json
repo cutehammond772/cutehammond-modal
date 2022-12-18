@@ -1,6 +1,10 @@
 {
   "name": "@cutehammond/modal",
+<<<<<<< HEAD
   "version": "0.4.0",
+=======
+  "version": "0.2.2",
+>>>>>>> 0329976a0dce5d611d1e34a746847cc5260373e9
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": {
