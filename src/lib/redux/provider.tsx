@@ -26,7 +26,7 @@ const beginSaga = () => {
   return store;
 };
 
-const ModalProvider = (props: React.PropsWithChildren) => (
+const AppProvider = (props: React.PropsWithChildren) => (
   <Provider context={context} store={beginSaga()}>
     {props.children}
   </Provider>
@@ -38,4 +38,4 @@ export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch: () => AppDispatch = createDispatchHook(context);
 export const useAppSelector: TypedUseSelectorHook<RootState> = createSelectorHook(context);
 
-export default ModalProvider;
+export default AppProvider;
