@@ -1,17 +1,26 @@
 import * as React from "react";
 import { useCallback, useRef, useEffect, PropsWithChildren } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import * as Styled from "./styled";
 
-import { StaticSelectors as selectors, Actions as actions, ModalIDReference } from "../redux";
+import {
+  StaticSelectors as selectors,
+  Actions as actions,
+  ModalIDReference,
+  useAppDispatch,
+  useAppSelector,
+} from "../redux";
 import { ModalMapperGenerator } from "./types";
 
+export interface ModalContainerProps {
+  mapper: ModalMapperGenerator;
+}
+
 // 모달을 관리하는 컴포넌트이다.
-const GlobalModalProvider = (props: PropsWithChildren<{ mapper: ModalMapperGenerator }>) => {
-  const dispatch = useDispatch();
-  const infos = useSelector(selectors.INFOS);
-  const lifes = useSelector(selectors.LIFES);
+const ModalContainer = (props: PropsWithChildren<ModalContainerProps>) => {
+  const dispatch = useAppDispatch();
+  const infos = useAppSelector(selectors.INFOS);
+  const lifes = useAppSelector(selectors.LIFES);
 
   const register = useRef<WeakSet<ModalIDReference>>(new WeakSet());
 
@@ -34,7 +43,7 @@ const GlobalModalProvider = (props: PropsWithChildren<{ mapper: ModalMapperGener
   }, [lifes, dispatch]);
 
   return (
-    <Styled.GlobalModalProvider>
+    <Styled.ModalContainer>
       {props.children}
       {Object.keys(infos).map((modalID) => {
         const { name } = infos[modalID];
@@ -42,8 +51,8 @@ const GlobalModalProvider = (props: PropsWithChildren<{ mapper: ModalMapperGener
 
         return <Modal modalID={modalID} onClose={() => closeHandler(modalID)} key={modalID} />;
       })}
-    </Styled.GlobalModalProvider>
+    </Styled.ModalContainer>
   );
 };
 
-export default GlobalModalProvider;
+export default ModalContainer;

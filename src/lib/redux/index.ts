@@ -1,6 +1,6 @@
 export { useAppDispatch, useAppSelector } from "./provider";
 
-export { default as ModalProvider } from "./provider";
+export { default as AppProvider } from "./provider";
 
 export { Actions } from "./actions";
 
