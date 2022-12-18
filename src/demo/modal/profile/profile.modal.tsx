@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as Styled from "./profile.styled";
 
-import { useRef, useLayoutEffect } from "react";
+import { useRef } from "react";
 import { DefaultModal } from "../default";
 import { GuestBanner, NotificationBanner, UserBanner } from "./banner";
 
@@ -12,12 +12,6 @@ import { ProfileData } from "./profile.props";
 const ProfileModal = (props: ModalProps) => {
   const { data: profile } = useModalData<ProfileData>(props.modalID);
   const containerRef = useRef<HTMLDivElement>(null);
-
-  useLayoutEffect(() => {
-    if (props.open) {
-      !!containerRef?.current && containerRef.current.focus();
-    }
-  }, [props.open]);
 
   return (
     <DefaultModal {...props}>

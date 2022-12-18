@@ -1,7 +1,7 @@
 import * as React from "react";
 import { SerializedStyles } from "@emotion/react";
 
-import { ModalTransition } from ".";
+import { ModalTransition } from "./types";
 
 // 모달 Transition 정보를 나타낸다.
 // Fade-in, Fade-out의 기본 Transition이 존재한다.

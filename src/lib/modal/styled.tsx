@@ -6,7 +6,7 @@ import { ModalTransition, ModalTransitions, TransitionProps } from ".";
 import { createTransitionProps } from "../creator";
 import { Duration } from "../redux";
 
-export const GlobalModalProvider = styled.div`
+export const ModalContainer = styled.div`
   position: absolute;
 
   width: 100%;
