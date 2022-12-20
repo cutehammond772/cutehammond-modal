@@ -1,14 +1,11 @@
 import React from "react";
-import { getInfoModal } from "./demo/modal/info";
-import { getProfile } from "./demo/modal/profile";
-import { useModal } from "./lib";
 
-import "./App.styled.css";
+import { INFO_MODAL } from "../demo/modal/info";
+import { useModal } from "../lib/dev/modal/hook";
+import "./App.css";
 
 export const App = () => {
-  const { create: createProfileModal } = useModal(getProfile("cutehammond"));
-  const { create: createGuestModal } = useModal(getProfile(""));
-  const { create: createInfoModal } = useModal(getInfoModal());
+  const { create: createInfoModal } = useModal(INFO_MODAL);
 
   return (
     <div className="container">
@@ -19,8 +16,6 @@ export const App = () => {
           체험해보세요!
         </div>
         <div className="buttons">
-          <button className="button" onClick={createProfileModal}>프로파일 모달</button>
-          <button className="button" onClick={createGuestModal}>게스트 모달</button>
           <button className="button" onClick={createInfoModal}>정보 모달</button>
         </div>
       </div>

@@ -1,20 +1,17 @@
 import * as React from "react";
 import { ModalProps, ModalBase } from "../../../lib";
+import { createModal } from "../../../lib/dev/modal/creator";
 
 import * as Styled from "./info.styled";
 
-const InfoModal = (props: ModalProps) => {
-  return (
-    <ModalBase layout={Styled.Layout} {...props}>
-      <Styled.Container>
-        <Styled.Title>정보</Styled.Title>
-        <Styled.Content>햄찌는 귀엽습니다.</Styled.Content>
-        <Styled.ConfirmButton onClick={props.onClose}>
-          확인
-        </Styled.ConfirmButton>
-      </Styled.Container>
-    </ModalBase>
-  );
-};
+export const INFO_MODAL = "info";
 
-export default InfoModal;
+createModal(INFO_MODAL, (props: ModalProps) => (
+  <ModalBase layout={Styled.Layout} {...props}>
+    <Styled.Container>
+      <Styled.Title>정보</Styled.Title>
+      <Styled.Content>햄찌는 귀엽습니다.</Styled.Content>
+      <Styled.ConfirmButton onClick={props.onClose}>확인</Styled.ConfirmButton>
+    </Styled.Container>
+  </ModalBase>
+));
