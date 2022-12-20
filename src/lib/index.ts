@@ -1,6 +1,6 @@
 export type { Duration } from "./redux";
 
-export { ModalBase, ModalTransitions } from "./modal";
+export { ModalBase, ModalTransitions, createModal } from "./modal";
 
 export { default as GlobalModalProvider } from "./provider";
 
@@ -16,9 +16,6 @@ export * as consts from "./consts";
 
 export { useModal, useModalData, useModalInfo } from "./hook";
 
-export type { ModalRequest } from "./hook";
+export { createTransitionProps } from "./creator";
 
-export { createModalMapper, createTransitionProps } from "./creator";
-
-// consts
-export { MODAL_TIMEOUT, TRANSITION_DURATION } from "./redux";
+export { TRANSITION_DURATION, MODAL_TIMEOUT } from "./redux";

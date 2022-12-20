@@ -1,11 +1,11 @@
 import * as React from "react";
-import { ModalContainer, ModalContainerProps } from "./modal";
 import { AppProvider } from "./redux";
+import ModalContainer from "./modal/container";
 
-const GlobalModalProvider = (props: React.PropsWithChildren<ModalContainerProps>) => (
+const GlobalModalProvider = (props: React.PropsWithChildren) => (
   <AppProvider>
-    <ModalContainer mapper={props.mapper}>{props.children}</ModalContainer>
+    <ModalContainer>{props.children}</ModalContainer>
   </AppProvider>
 );
 
-export default React.memo(GlobalModalProvider);
+export default GlobalModalProvider;
