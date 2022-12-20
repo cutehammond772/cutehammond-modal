@@ -50,7 +50,7 @@ const ModalContainer = (props: React.PropsWithChildren) => {
           throw new Error(logMsg.error("'{0}'는 존재하지 않는 모달입니다.", name));
         }
 
-        const Modal = mapper[name];
+        const { component: Modal } = mapper[name];
 
         return <Modal modalID={modalID} onClose={() => closeHandler(modalID)} key={modalID} />;
       })}
