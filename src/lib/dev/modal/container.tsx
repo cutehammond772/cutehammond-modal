@@ -11,7 +11,7 @@ import {
   useAppSelector,
 } from "../../redux";
 import { msg } from "../../utils";
-import { mapper } from "./creator";
+import { useMapper } from "./creator";
 
 const logMsg = msg("ModalContainer");
 
@@ -22,6 +22,7 @@ const ModalContainer = (props: React.PropsWithChildren) => {
   const lifes = useAppSelector(selectors.LIFES);
 
   const register = useRef<WeakSet<ModalIDReference>>(new WeakSet());
+  const mapper = useMapper();
 
   const closeHandler = useCallback(
     (modalID: string) => dispatch(actions.removeModal({ modalID })),

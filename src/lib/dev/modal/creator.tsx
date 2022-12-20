@@ -9,9 +9,11 @@ interface ModalMapper {
   [name: string]: React.ComponentType<ModalProps>;
 }
 
-export const mapper: ModalMapper = {
+const mapper: ModalMapper = {
   // Modal Mappings
 };
+
+export const useMapper = () => mapper;
 
 export const createModal = (
   name: string,

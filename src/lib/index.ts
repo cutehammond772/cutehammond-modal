@@ -20,5 +20,4 @@ export type { ModalRequest } from "./hook";
 
 export { createModalMapper, createTransitionProps } from "./creator";
 
-// consts
-export { MODAL_TIMEOUT, TRANSITION_DURATION } from "./redux";
+export { TRANSITION_DURATION, MODAL_TIMEOUT } from "./redux";
