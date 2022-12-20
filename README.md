@@ -2,7 +2,7 @@
 
 이 라이브러리는 커뮤니티 `Pill`에서 사용하고 있는 커스텀 모달 라이브러리입니다.
 
-> 이 Readme는 v0.4.0를 기준으로 작성되었습니다.
+> 이 Readme는 v0.5.0를 기준으로 작성되었습니다.
 
 [![npm version](https://img.shields.io/npm/v/@cutehammond/modal.svg?style=flat-square)](https://www.npmjs.com/package/@cutehammond/modal)
 
@@ -10,11 +10,11 @@
 
 ## 이 라이브러리에 사용된 기술 스택
 
-> 이 기술 스택을 사용하여 프로젝트를 진행하는 분께 이 라이브러리를 추천합니다.
-
-|<img height="128" width="128" src="https://cdn.simpleicons.org/createreactapp" />|<img height="128" width="128" src="https://cdn.simpleicons.org/typescript" />|<img height="128" width="128" src="https://cdn.simpleicons.org/redux" />|<img height="128" width="128" src="https://cdn.simpleicons.org/reduxsaga" />|<img height="128" width="128" src="https://raw.githubusercontent.com/emotion-js/emotion/main/emotion.png" />|
+|<img width="128" src="https://cdn.simpleicons.org/createreactapp" />|<img width="128" src="https://cdn.simpleicons.org/typescript" />|<img width="128" src="https://cdn.simpleicons.org/redux" />|<img width="128" src="https://cdn.simpleicons.org/reduxsaga" />|<img width="128" src="https://raw.githubusercontent.com/emotion-js/emotion/main/emotion.png" />|
 |:---:|:---:|:---:|:---:|:---:|
-|**CRA** (create-react-app)|**Typescript**|**Redux-Toolkit**|**Redux-Saga**|**Emotion**|
+|***CRA** (create-react-app)|***Typescript**|**Redux-Toolkit**|**Redux-Saga**|***Emotion**|
+
+> '*' 표시된 스택은 이 라이브러리를 사용하는 프로젝트에서 반드시 사용해야 합니다. 
 
 ## 라이브러리 설치하기
 
@@ -38,10 +38,6 @@ $ yarn add @cutehammond/modal
 
 > 단, `GlobalStyles`과 같이 전역 스타일 설정이 존재하는 경우 이 설정이 먼저 적용되도록 합니다.
 
-> FAQ: `mapper`가 props로 전달되는데, 이것은 무엇인가요?
->
-> 답: 모달의 고유 이름과 모달 컴포넌트를 매핑한 형태입니다. 이후 예시에서 설명합니다.
-
 `index.tsx`
 
 ```tsx
@@ -49,21 +45,17 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import GlobalStyles from "./styles";
 
-import { GlobalModalProvider, createModalMapper } from "@cutehammond/modal";
+import { GlobalModalProvider } from "@cutehammond/modal";
 import { App } from "./App";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-const mapper = createModalMapper(() => ({
-  // Some Modal Mappings
-}));
-
 root.render(
   <>
     <GlobalStyles />
-    <GlobalModalProvider mapper={mapper}>
+    <GlobalModalProvider>
       <App />
     </GlobalModalProvider>
   </>
@@ -78,52 +70,14 @@ root.render(
 >
 > 이 이외에도 무궁무진한 기능이 포함되어 있습니다! 이후 API 문서를 통해 자세한 방법이 추가될 예정입니다.
 
-- 모달 컴포넌트 정의
-
-`<ModalBase />` 컴포넌트를 이용하여 커스텀 모달을 정의합니다.
-
-이때 layout prop을 통해 모달의 레이아웃을 직접 정의할 수 있습니다.
-
-> **이때, 컴포넌트의 props는 무조건 `ModalProps`여야 합니다.**
-
-> FAQ: 별도의 props를 전달하고 싶습니다. 이럴 땐 어떻게 해야 할까요?
-> 
-> 답: `ModalRequest`의 `data prop`을 통해 전달해야 합니다.
->
-> (이후 API 문서를 통해 자세한 방법이 추가될 예정입니다.)
-
-`info.modal.tsx`
-
-```tsx
-import * as React from "react";
-import { ModalProps, Modal } from "@cutehammond/modal";
-
-import * as Styled from "./info.styled";
-
-const InfoModal = (props: ModalProps) => {
-  return (
-    <ModalBase layout={Styled.Layout} {...props}>
-      <Styled.Container>
-        <Styled.Title>정보</Styled.Title>
-        <Styled.Content>햄찌는 귀엽습니다.</Styled.Content>
-        <Styled.ConfirmButton onClick={props.onClose}>
-          확인
-        </Styled.ConfirmButton>
-      </Styled.Container>
-    </ModalBase>
-  );
-};
-
-export default InfoModal;
-```
-
 ---
+### 2-1. 모달 레이아웃 정의
 
-- 모달 스타일 정의
+모달의 레이아웃을 정의하는 데 `emotion` 라이브러리의 css 함수가 필요합니다.
 
-위의 layout prop에는 `emotion의 css`가 들어갑니다.
+> 위의 과정을 통해 만들어진 css 객체는 `<ModalBase />` 컴포넌트의 layout prop에 들어갑니다.
 
-이 이외에는 `scss`, `styled-components`, `css` 등 다른 방법으로도 스타일을 정의할 수 있습니다.
+> 레이아웃 내의 스타일은 `scss`, `styled-components`, `css` 등 다른 방법으로도 스타일을 정의할 수 있습니다. 여기서는 `styled-components`의 방식으로 예시를 들었습니다.
 
 `info.styled.tsx`
 
@@ -132,7 +86,7 @@ export default InfoModal;
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-export const Layout = css`
+export const Modal = css`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -225,47 +179,55 @@ export const ConfirmButton = styled.div`
 ```
 
 ---
+### 2-2. 모달 컴포넌트 정의
 
-- `ModalRequest` 정의
+`<ModalBase />` 컴포넌트를 이용하여 모달을 정의합니다.
 
-`useModal` Hook을 통해 모달을 생성하는데, 이때 모달의 정보를 전달하는 데 필요합니다.
+- 모달의 고유 이름 `INFO_MODAL`을 생성합니다.
+- layout prop에 위에서 정의한 css 객체를 대입합니다.
+- `createModal` 함수를 통해 모달을 등록합니다.
 
-> 별도의 props가 필요한 경우 data prop에 추가합니다.
+> **이때, 컴포넌트의 props는 무조건 `ModalProps`여야 합니다.**
+
+> FAQ: 별도의 props를 전달하고 싶습니다. 이럴 땐 어떻게 해야 할까요?
 >
+> `useModal` Hook에서 모달을 생성할 때 prop을 전달합니다.
+> 
 > (이후 API 문서를 통해 자세한 방법이 추가될 예정입니다.)
 
-> FAQ: 굳이 INFO_MODAL 상수를 따로 두는 이유가 있을까요?
->
-> 답: 이는 모달의 고유 이름을 나타내며, 이후에 ModalMapper에서 모달의 고유 이름과 모달 컴포넌트를 매핑하는 데 필요하므로 따로 정의해 두는 것이 좋습니다.
-
-`info.props.tsx`
+`info.modal.tsx`
 
 ```tsx
-import { ModalRequest } from "@cutehammond/modal";
+import * as React from "react";
+import { ModalProps, Modal, createModal } from "@cutehammond/modal";
 
-export const INFO_MODAL = "info";
+import * as Styled from "./info.styled";
 
-export const getInfoModal = (): ModalRequest => ({
-  name: INFO_MODAL,
-  data: {},
-});
+export const INFO_MODAL = "INFO_MODAL";
+
+const InfoModal = (props: ModalProps) => {
+  return (
+    <ModalBase layout={Styled.Modal} {...props}>
+      <Styled.Container>
+        <Styled.Title>정보</Styled.Title>
+        <Styled.Content>햄찌는 귀엽습니다.</Styled.Content>
+        <Styled.ConfirmButton onClick={props.onClose}>
+          확인
+        </Styled.ConfirmButton>
+      </Styled.Container>
+    </ModalBase>
+  );
+};
+
+createModal(INFO_MODAL, InfoModal);
 ```
 
-- `ModalMapper`에 모달 추가
-
-`index.tsx`로 돌아와서, 모달의 고유 이름과 모달 컴포넌트를 매핑시킵니다.
-
-`index.tsx`
-
-```tsx
-const mapper = createModalMapper(() => ({
-  [INFO_MODAL]: InfoModal,
-}));
-```
-
-- `useModal`를 이용하여 create 함수 생성
+---
+### 2-3. `useModal`를 이용하여 create 함수 생성
 
 `useModal` Hook은 모달 생성 함수를 반환합니다. 이 함수를 적절한 시기에 호출하면 됩니다.
+
+- useModal Hook의 매개 변수에 **모달의 고유 이름**을 대입합니다. 
 
 `App.tsx`
 
@@ -273,10 +235,10 @@ const mapper = createModalMapper(() => ({
 import React from "react";
 import { useModal } from "@cutehammond/modal";
 
-import { getInfoModal } from "./demo/modal/info";
+import { INFO_MODAL } from "./demo/modal/info";
 
 export const App = () => {
-  const { create: createInfoModal } = useModal(getInfoModal());
+  const { create: createInfoModal } = useModal(INFO_MODAL);
 
   return (
     <div>
