@@ -13,6 +13,4 @@ export interface ModalMapper {
   [name: string]: React.ComponentType<ModalProps>;
 }
 
-export type ModalMapperGenerator = () => ModalMapper;
-
 export type TransitionPropsGenerator = () => TransitionProps;

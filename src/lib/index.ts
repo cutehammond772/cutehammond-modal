@@ -16,8 +16,6 @@ export * as consts from "./consts";
 
 export { useModal, useModalData, useModalInfo } from "./hook";
 
-export type { ModalRequest } from "./hook";
-
-export { createModalMapper, createTransitionProps } from "./creator";
+export { createTransitionProps } from "./creator";
 
 export { TRANSITION_DURATION, MODAL_TIMEOUT } from "./redux";

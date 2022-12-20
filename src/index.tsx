@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import GlobalModalProvider from "./lib/dev/modal/provider";
+import { GlobalModalProvider } from "./lib";
 
 import { App } from "./demo/App";
 import GlobalStyles from "./demo/styles";

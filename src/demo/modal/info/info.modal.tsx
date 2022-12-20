@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ModalProps, ModalBase } from "../../../lib";
-import { createModal } from "../../../lib/dev/modal/creator";
+import { createModal } from "../../../lib/modal/creator";
 
 import * as Styled from "./info.styled";
 
