@@ -8,4 +8,4 @@ const GlobalModalProvider = (props: React.PropsWithChildren) => (
   </AppProvider>
 );
 
-export default React.memo(GlobalModalProvider);
+export default GlobalModalProvider;

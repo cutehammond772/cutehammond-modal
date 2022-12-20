@@ -1,6 +1,6 @@
 export type { Duration } from "./redux";
 
-export { ModalBase, ModalTransitions } from "./modal";
+export { ModalBase, ModalTransitions, createModal } from "./modal";
 
 export { default as GlobalModalProvider } from "./provider";
 

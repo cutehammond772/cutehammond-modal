@@ -8,6 +8,9 @@ import { GuestBanner, NotificationBanner, UserBanner } from "./banner";
 import { GuestMenu } from "./menu";
 import { ModalProps, useModalData } from "../../../lib";
 import { ProfileData } from "./profile.props";
+import { createModal } from "../../../lib";
+
+export const PROFILE_MODAL = "PROFILE_MODAL";
 
 const ProfileModal = (props: ModalProps) => {
   const { data: profile } = useModalData<ProfileData>(props.modalID);
@@ -32,4 +35,5 @@ const ProfileModal = (props: ModalProps) => {
   );
 };
 
-export default ProfileModal;
+// 모달을 등록한다.
+createModal(PROFILE_MODAL, ProfileModal);
