@@ -20,10 +20,6 @@ export interface NotificationProps {
   onClick?: () => void;
   onRemove?: () => void;
 }
-
-// profile
-export const PROFILE_MODAL = "profile";
-
 export interface ProfileData {
   userName: string;
 }
