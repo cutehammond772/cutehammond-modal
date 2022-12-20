@@ -1,8 +1,9 @@
 import React from "react";
 
-import { INFO_MODAL } from "../demo/modal/info";
-import { useModal } from "../lib/dev/modal/hook";
+import { INFO_MODAL } from "./modal/info";
 import "./App.css";
+
+import { useModal } from "../lib/dev/modal/hook";
 
 export const App = () => {
   const { create: createInfoModal } = useModal(INFO_MODAL);
@@ -12,8 +13,8 @@ export const App = () => {
       <div className="banner">
         <div className="title">@cutehammond / modal</div>
         <div className="description">
-          이 라이브러리에 관심을 가져주셔서 감사합니다. 아래에 다양한 모달 샘플이 있으니
-          체험해보세요!
+          Thank you for using 'cutehammond-modal' library. <br />
+          There are a variety of modals, so try them out!
         </div>
         <div className="buttons">
           <button className="button" onClick={createInfoModal}>정보 모달</button>

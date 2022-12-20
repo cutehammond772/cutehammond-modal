@@ -9,7 +9,7 @@ export const useModal = <T extends AnyProps>(name: string, props?: T) => {
   // 모달을 생성한다. 이 Hook에서 모달의 관리는 불가능하다.
   // Duration 추가가 필요하다.
   const create = useCallback(
-    () => dispatch(actions.createModal({ name, data: { ...props } })),
+    () => dispatch(actions.createModal({ name, data: props ?? {} })),
     [dispatch, name, props]
   );
 
