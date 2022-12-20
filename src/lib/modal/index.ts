@@ -6,7 +6,7 @@ export { default as ModalContainer } from "./container";
 
 export { ModalTransitions } from "./types";
 
-export { createModal } from "./creator";
+export { createModal, useMapper } from "./creator";
 
 export type {
   ModalTransition,
