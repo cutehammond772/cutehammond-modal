@@ -3,7 +3,7 @@ import React from "react";
 import { INFO_MODAL } from "./modal/info";
 import "./App.css";
 
-import { useModal } from "../lib/dev/modal/hook";
+import { useModal } from "../lib/hook";
 
 export const App = () => {
   const { create: createInfoModal } = useModal(INFO_MODAL);

@@ -1,13 +1,9 @@
 import * as React from "react";
 
-import { msg } from "../../utils";
-import { ModalProps } from "../../modal";
+import { msg } from "../utils";
+import { ModalMapper, ModalProps } from ".";
 
 const logMsg = msg("Modal");
-
-interface ModalMapper {
-  [name: string]: React.ComponentType<ModalProps>;
-}
 
 const mapper: ModalMapper = {
   // Modal Mappings
