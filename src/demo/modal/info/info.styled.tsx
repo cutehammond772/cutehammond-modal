@@ -2,7 +2,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-export const Layout = css`
+export const Modal = css`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
